@@ -5,12 +5,13 @@ import (
 	"net/http"
 
 	Handler "todo-app/service/api"
-	DB "todo-app/service/util"
+	DB "todo-app/util"
 
 	"github.com/gorilla/mux"
 )
 
 func createServer() {
+	port := ":9000"
 	router := mux.NewRouter()
 
 	// API
@@ -20,7 +21,8 @@ func createServer() {
 	// router.HandleFunc("/tasks/{id}", taskHandler.UpdateTask).Methods("PUT")
 	// router.HandleFunc("/tasks/{id}", taskHandler.DeleteTask).Methods("DELETE")
 
-	log.Fatal(http.ListenAndServe(":9000", router))
+	log.Println("Server is listening on port", port)
+	log.Fatal(http.ListenAndServe(port, router))
 
 }
 
