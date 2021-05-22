@@ -15,10 +15,10 @@ func createServer() {
 
 	// API
 	router.HandleFunc("/tasks", Handler.GetTasks).Methods("GET")
-	// router.HandleFunc("/tasks/{id}", Handler.GetTask).Methods("GET")
+	router.HandleFunc("/tasks/{id}", Handler.GetTask).Methods("GET")
 	router.HandleFunc("/tasks", Handler.CreateTask).Methods("POST")
-	// router.HandleFunc("/tasks/{id}", Handler.UpdateTask).Methods("PUT")
-	// router.HandleFunc("/tasks/{id}", Handler.DeleteTask).Methods("DELETE")
+	router.HandleFunc("/tasks/{id}", Handler.UpdateTask).Methods("PUT")
+	router.HandleFunc("/tasks/{id}", Handler.DeleteTask).Methods("DELETE")
 
 	log.Println("Server is listening on port", port)
 	log.Fatal(http.ListenAndServe(port, router))
