@@ -4,7 +4,7 @@ import (
 	"log"
 	"net/http"
 
-	Handler "todo-app/core"
+	"github.com/tobias/todo-app/routes"
 
 	"github.com/gorilla/mux"
 )
@@ -14,11 +14,11 @@ func createServer() {
 	router := mux.NewRouter()
 
 	// API
-	router.HandleFunc("/tasks", Handler.GetTasks).Methods("GET")
-	router.HandleFunc("/tasks/{id}", Handler.GetTask).Methods("GET")
-	router.HandleFunc("/tasks", Handler.CreateTask).Methods("POST")
-	router.HandleFunc("/tasks/{id}", Handler.UpdateTask).Methods("PUT")
-	router.HandleFunc("/tasks/{id}", Handler.DeleteTask).Methods("DELETE")
+	router.HandleFunc("/tasks", routes.GetTasks).Methods("GET")
+	router.HandleFunc("/tasks/{id}", routes.GetTask).Methods("GET")
+	router.HandleFunc("/tasks", routes.CreateTask).Methods("POST")
+	router.HandleFunc("/tasks/{id}", routes.UpdateTask).Methods("PUT")
+	router.HandleFunc("/tasks/{id}", routes.DeleteTask).Methods("DELETE")
 
 	log.Println("Server is listening on port", port)
 	log.Fatal(http.ListenAndServe(port, router))
@@ -26,6 +26,5 @@ func createServer() {
 }
 
 func main() {
-	Handler.ConnectCockRoachDB()
 	createServer()
 }
